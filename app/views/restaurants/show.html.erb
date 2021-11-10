@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-around mx-5">
+  <div>
+    <h1>Restaurant</h1>
+    <div class="card-product">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <div class="card-product-infos" style="width: 20rem;">
+        <h3><%=@restaurant.name %></h3>
+        <p><%= @restaurant.address %></p>
+        <p><%= @restaurant.category.capitalize %></p>
+        <p><%= @restaurant.phone_number %></p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h1>ADD Your Review Here:</h1>
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.input :content %>
+        <%= f.input :rating, collection: (0..5)%>
+        <%= f.button :submit, "Submit", class: 'btn btn-warning' %>
+      <% end %>
+  </div>
+</div>
+
+<br>
+
+
+<div class="container">
+  <h2>Reviews</h2>
+    <% @restaurant.reviews.each do |r| %>
+    <ul>
+    <li><h5><%= "#{r.content} #{r.rating}" %><i class="fas fa-star"></i></h5></li>
+    </ul>
+    <% end %>
+    <%= link_to "Return Home", restaurants_path, class: "btn btn-primary mb-2" %>
+</div>
